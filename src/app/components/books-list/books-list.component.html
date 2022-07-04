@@ -1,0 +1,31 @@
+<div class="container mt-3" *ngIf="books; else loader">
+  <ng-container *ngIf="books.length > 0; else empty">
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr [ngStyle]="{verticalAlign: 'middle'}">
+        <th class="col-sm-5">title</th>
+        <th class="col-sm-5">authors</th>
+        <th class="col-sm-2">action with the book</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of books" [ngStyle]="{verticalAlign: 'middle'}">
+        <td class="col-sm-5">{{book.volumeInfo.title}}</td>
+        <td class="col-sm-5">{{book.volumeInfo.authors}}</td>
+        <td class="col-sm-2">
+          <button mat-button color="primary" (click)="id.emit(book.id)">
+            change
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #empty>
+    <h3 class="text-center">books list is empty</h3>
+  </ng-template>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
